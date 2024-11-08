@@ -1,0 +1,57 @@
+{
+    "format_version": 2,
+    "metadata": {
+        "authors": [
+            "fruitkitty"
+        ]
+    },
+    "header": {
+        "name": "Simple Essentials",
+        "description": "Made by fruitkitty",
+        "min_engine_version": [
+            1,
+            21,
+            30
+        ],
+        "uuid": "ee46b53f-fa14-454d-a72a-3cb794e8ac65",
+        "version": [
+            1,
+            0,
+            6
+        ]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "0f0f762c-f04f-446b-9384-267685d4f17c",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "script",
+            "language": "javascript",
+            "uuid": "e848d2a8-bc07-4231-ba64-ad86a43b497b",
+            "entry": "scripts/main.js",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        }
+		
+    ],
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.16.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.4.0-beta"
+        }
+    ],
+    "capabilities": ["script_eval"]
+}

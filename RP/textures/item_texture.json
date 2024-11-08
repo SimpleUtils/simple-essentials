@@ -1,0 +1,12 @@
+{
+	"resource_pack_name": "Custom Commands",
+	"texture_name": "atlas.items",
+	"texture_data": {
+		"admin": {
+			"textures": "textures/items/settings"
+		},
+		"redeem": {
+			"textures": "textures/items/redeem"
+		}
+	}
+}
