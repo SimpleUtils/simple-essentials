@@ -14,7 +14,7 @@
 		}
 	},
 	"header": {
-		"name": "Simple Essentials",
+		"name": "Simple Essentials 0.1.7",
 		"description": "Made by FruitKitty on dsc",
 		"min_engine_version": [
 			1,
@@ -25,7 +25,7 @@
 		"version": [
 			1,
 			0,
-			12
+			14
 		]
 	},
 	"modules": [

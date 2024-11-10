@@ -29,12 +29,14 @@ function openModules(player) {
         .toggle("Warps", config.warpSystem)
         .toggle("UI Builder", config.uiBuilderSystem)
         .toggle("Bans", config.banSystem)
+        .toggle("Platform tags + bans", config.platformSystem)
+        .toggle("TPA System", config.TPASystem)
         .submitButton("Submit");
 
     modulesForm.show(player).then(res => {
         if (res.canceled) uiManager.open(player, "admin.main")
 
-        const [chatRanks, broadcastVal, kickMenuVal, bindVal, codeVal, warpVal, uiBuilderVal, banVal] = res.formValues;
+        const [chatRanks, broadcastVal, kickMenuVal, bindVal, codeVal, warpVal, uiBuilderVal, banVal, platformVal, TPAValue] = res.formValues;
 
         config.kickMenuUpdate(kickMenuVal)
         config.broadcastUpdate(broadcastVal)
@@ -43,6 +45,8 @@ function openModules(player) {
         config.codeUpdate(codeVal)
         config.uiBuilderUpdate(uiBuilderVal)
         config.banUpdate(banVal)
+        config.platformSystemUpdate(platformVal)
+        config.TPASystemToggle(TPAValue)
         if (chatRanks === true) {
             config.chatRanksOn()
         } else {

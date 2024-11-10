@@ -107,6 +107,18 @@ if (codeSystem === "false") {
     codeSystem = false
 }
 
+let TPASystem = mc.world.getDynamicProperty("TPASystem");
+
+if (TPASystem === undefined) {
+    TPASystem = true
+}
+if (TPASystem === "true") {
+    TPASystem = true
+}
+if (TPASystem === "false") {
+    TPASystem = false
+}
+
 let warpSystem = mc.world.getDynamicProperty("warpSystem");
 
 if (warpSystem === undefined) {
@@ -174,6 +186,10 @@ function bindUpdate(status) {
     bindSystem = status
     mc.world.setDynamicProperty("bindingSystem", `${status}`)
 }
+function TPASystemToggle(status) {
+    TPASystem = status
+    mc.world.setDynamicProperty("TPASystem", `${status}`)
+}
 function chatRanksOff() {
     mc.world.setDynamicProperty("chatranks", false)
     chatRankToggle = false
@@ -198,11 +214,7 @@ function platformban_desktop(status) {
     mc.world.setDynamicProperty("desktopBanned", status)
     desktopBanned = status
 }
-mc.world.sendMessage(`d=${desktopBanned}`)
-mc.world.sendMessage(`m=${mobileBanned}`)
-mc.world.sendMessage(`c=${consoleBanned}`)
-mc.world.sendMessage(`dd=${mc.world.getDynamicProperty("desktopBanned")}`)
 
 // Chat rank is in main.js because yes
 
-export { uiBuilderSystem, platformban_console, platformban_desktop, platformban_mobile, mobileBanned, consoleBanned, desktopBanned, uiBuilderUpdate, platformSystem, banSystem, banUpdate, memberRankColour, kickMenuEnabled, broadcasting, broadcastUpdate, kickMenuUpdate, chatRankToggle, chatRanksOn, chatRanksOff, bindSystem, bindUpdate, warpSystem, warpUpdate, codeSystem, codeUpdate, platformSystemUpdate }
+export { uiBuilderSystem, platformban_console, TPASystem, TPASystemToggle, platformban_desktop, platformban_mobile, mobileBanned, consoleBanned, desktopBanned, uiBuilderUpdate, platformSystem, banSystem, banUpdate, memberRankColour, kickMenuEnabled, broadcasting, broadcastUpdate, kickMenuUpdate, chatRankToggle, chatRanksOn, chatRanksOff, bindSystem, bindUpdate, warpSystem, warpUpdate, codeSystem, codeUpdate, platformSystemUpdate }

@@ -39,7 +39,7 @@ export function parseCommand(message, prefix) {
 				if (bracketCount[0] !== ++bracketCount[1] || braceCount[0] !== braceCount[1] || (quoteCount && quoteCount & 1)) break;
 				braceCount = [0, 0], bracketCount = [0, 0], quoteCount = 0, spaceCount = 0, finding = false;
 				break;
-			case '"':
+			case 'aaaaaa':
 				switch (finding) {
 					case 'json':
 						output[o] += char;
@@ -101,7 +101,7 @@ export function parseCommand(message, prefix) {
 					spaceCount = 1;
 				}
 				switch (char) {
-					case '@':
+					case 'asldaskldalskdlkasjdl':
 						const nextChar = message?.[i + 1];
 						switch (nextChar) {
 							case '"':

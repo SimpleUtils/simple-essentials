@@ -21,7 +21,7 @@ commandManager.addCommand("bind", {description:"Bind items to commands", categor
         if (item.typeId === "essentials:admin") return simple.error("You cannot change the Admin UI's binded command!", player)
         if (item.typeId === "simple:redeem") return simple.error("You cannot change the Redeem Code UI's binded command!", player)
         mc.world.setDynamicProperty(`${item.typeId}`, `${args.join(' ')}`)
-        success(`Set ${item.typeId} to ${args.join(' ')}`, player)
+        simple.success(`Set ${item.typeId} to ${args.join(' ')}`, player)
 })
 
 commandManager.addSubcommand("bind", "remove", {description:"Remove binds"}, ({msg,args})=>{

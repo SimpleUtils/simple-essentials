@@ -7,6 +7,7 @@ import { openMain } from "./uiManager";
 import { openModules } from "./modules";
 import * as config from '../config'
 import translation from "../api/translation";
+import rankAPI from "../api/rankAPI";
 
 import { ActionForm, prismarineDb } from "../lib/prismarinedb";
 import uiManager from "../uiManager";
@@ -23,6 +24,7 @@ uiManager.addUI("admin.mainsettings | admin.mainsettings", "Main Settings", (pla
     form.button(`§bModules\n§r§7Enable or disable modules`, "textures/azalea_icons/SettingsNewestFirst.png", (player)=>{
         openModules(player)
     })
+
     form.button(`§bGift Codes\n§r§7Do gift code stuff`, "icons/Chat.png", (player)=>{
         if (!config.codeSystem === true) return error("Code system is disabled!", player)
         uiManager.open(player, "admin.codes.root")

@@ -6,7 +6,7 @@
         ]
     },
     "header": {
-        "name": "Simple Essentials",
+        "name": "Simple Essentials 0.1.7",
         "description": "Made by fruitkitty",
         "min_engine_version": [
             1,
@@ -17,7 +17,7 @@
         "version": [
             1,
             0,
-            6
+            7
         ]
     },
     "modules": [

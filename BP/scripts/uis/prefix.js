@@ -8,7 +8,7 @@ import { ModalForm } from '../lib/form_func';
 
 uiManager.addUI("admin.config.prefix | admin.config.prefix", "prefix", (player)=>{
     let modalForm = new ModalForm();
-    modalForm.title("Broadcast")
+    modalForm.title("Prefix")
     modalForm.textField("New Prefix", "Example: !");
     modalForm.submitButton("Submit");
     modalForm.show(player, false, (player, response)=>{

@@ -9,6 +9,7 @@ import './api/giftCodes.js'
 import './api/actionParser.js'
 import './commands/prefix.js'
 import './uis/giftCodes/add.js'
+import './commands/platform.js'
 import './uis/giftCodes/edit.js'
 import './uis/giftCodes/redeem.js'
 import './uis/giftCodes/root.js'
@@ -39,10 +40,12 @@ import './commands/to.js'
 import './commands/uis.js'
 import './commands/ban.js'
 import './commands/warp.js'
+import './commands/tpa.js'
 import './commands/credits.js'
 import './commands/config.js'
 import './onItemUse.js'
 import translation from './api/translation.js'
+import playerAPI from './api/playerAPI.js'
 import './api/banAPI.js'
 import { clearChat } from './clearChat.js'
 import * as config from './config.js'
@@ -97,8 +100,15 @@ mc.system.afterEvents.scriptEventReceive.subscribe(e => {
         uiManager.open(e.sourceEntity, args[0], ...args.slice(1))
     }
 })
+// Couldn't be bothered to make my own file lmao
+commandManager.addCommand("floatingtext", { description: "Floating text" }, ({ msg, args }) => {
+    if (!msg.sender.hasTag('admin')) return msg.sender.sendMessage(translation.getTranslation(msg.sender, 'error', "You can't run this command without having permissions"))
+    let entity = msg.sender.dimension.spawnEntity("simple:floating_text", msg.sender.location)
+    entity.nameTag = args.join(' ').replaceAll("{nl}", "\n")
+    msg.sender.sendMessage(translation.getTranslation(msg.sender, 'success', `Set floating text with nametag: ${args.join(' ')}`))
+})
 // ban system kick :p
-mc.world.afterEvents.playerSpawn.subscribe(async ({player, initialSpawn}) => {
+mc.world.afterEvents.playerSpawn.subscribe(async ({ player, initialSpawn }) => {
     if (!config.banSystem === true) return console.log("Ban System is disabled, so the player is not getting checked for bans!")
     let bans = banAPI.getBans();
     let checkbanOfTargetPlayerResult;
@@ -108,15 +118,15 @@ mc.world.afterEvents.playerSpawn.subscribe(async ({player, initialSpawn}) => {
             checkbanOfTargetPlayerResult = ban.data.name
         }
     }
-            simple.scriptEngine.runCommandAsync(`kick ${checkbanOfTargetPlayerResult} You are banned from this server.`)
+    simple.scriptEngine.runCommandAsync(`kick ${checkbanOfTargetPlayerResult} You are banned from this server.`)
 })
 
 // Platform bans
-mc.world.afterEvents.playerSpawn.subscribe(async ({player, initialSpawn}) => {
+mc.world.afterEvents.playerSpawn.subscribe(async ({ player, initialSpawn }) => {
     platformAPI.clearAllPlatformTags(player)
     if (!config.platformSystem === true) return console.log("Platform system is disabled, will not kick people that are on banned platforms, and players will not get platform tags!")
     if (player.clientSystemInfo.platformType === "Desktop") {
-        if (config.desktopBanned === true) { 
+        if (config.desktopBanned === true) {
             simple.scriptEngine.runCommandAsync(`kick ${player.name} Platform is banned by the server admins.`)
         } else {
             platformAPI.addDesktopTag(player)
@@ -124,7 +134,7 @@ mc.world.afterEvents.playerSpawn.subscribe(async ({player, initialSpawn}) => {
         }
     }
     if (player.clientSystemInfo.platformType === "Mobile") {
-        if (config.mobileBanned === true) { 
+        if (config.mobileBanned === true) {
             simple.scriptEngine.runCommandAsync(`kick ${player.name} Platform is banned by the server admins.`)
         } else {
             platformAPI.addMobileTag(player)
@@ -132,13 +142,16 @@ mc.world.afterEvents.playerSpawn.subscribe(async ({player, initialSpawn}) => {
         }
     }
     if (player.clientSystemInfo.platformType === "Console") {
-        if (config.desktopBanned === true) { 
+        if (config.desktopBanned === true) {
             simple.scriptEngine.runCommandAsync(`kick ${player.name} Platform is banned by the server admins.`)
         } else {
             platformAPI.addConsoleTag(player)
             console.log("Player joined successfully on console")
         }
     }
+})
+mc.world.beforeEvents.playerLeave.subscribe((ev) => {
+    playerAPI.handlePlayerLeave(ev.player.name)
 })
 mc.world.beforeEvents.chatSend.subscribe((eventData) => {
     const msg = eventData
@@ -158,8 +171,8 @@ mc.world.beforeEvents.chatSend.subscribe((eventData) => {
     }
     const player = msg.sender
     let ranks = player.getTags()
-    .filter(tag => tag.startsWith('simplerank:'))  
-    .map(tag => tag.substring(11));                 
+        .filter(tag => tag.startsWith('simplerank:'))
+        .map(tag => tag.substring(11));
 
     if (ranks.length > 0 && chatRankToggle === true) {
 
@@ -167,13 +180,13 @@ mc.world.beforeEvents.chatSend.subscribe((eventData) => {
 
         const simpleNcTag = msg.sender.getTags().find(tag => tag.startsWith('simple-nc:'));
         let simpleNcDisplay = '';
-    
+
         if (simpleNcTag) {
             simpleNcDisplay = simpleNcTag.split('simple-nc:')[1];
         }
         const simpleCCTag = msg.sender.getTags().find(tag => tag.startsWith('simple-cc:'));
         let simpleCCDisplay = '';
-    
+
         if (simpleCCTag) {
             simpleCCDisplay = simpleCCTag.split('simple-cc:')[1];
         }
@@ -183,7 +196,7 @@ mc.world.beforeEvents.chatSend.subscribe((eventData) => {
         if (msg.message.startsWith(`${commandPrefix}`)) return;
         mc.world.sendMessage(`§8[§r${joined}§r§8]§7 ${simpleNcDisplay}${msg.sender.name} §8>>§7${simpleCCDisplay} ${newMessage}`);
     }
-    
+
 });
 
 export { changeCommandPrefix, commandPrefix }
