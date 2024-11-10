@@ -1,5 +1,6 @@
 # Simple Essentials
 An open-source feature rich MCBE Essentials Addon
+-
 Docs: https://simple.amethystdev.com
 
 
