@@ -3,6 +3,13 @@ import * as main from './main'
 
 let memberRankColour = "§b"
 
+let homeLimit = mc.world.getDynamicProperty("homeLimit")
+
+if (homeLimit === undefined) {
+    mc.world.setDynamicProperty("homeLimit", "3")
+    homeLimit = 3
+}
+
 let broadcasting = mc.world.getDynamicProperty("broadcastEnabled")
 
 let consoleBanned = mc.world.getDynamicProperty("consoleBanned")

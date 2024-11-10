@@ -10,6 +10,9 @@ function success(msg, player) {
 function broadcast(msg) {
     mc.world.sendMessage(`§b§lBROADCAST§8 >>§r§7 ${msg}`)
 }
+function isNumeric(str) {
+    return Number.isFinite(Number(str));
+}
 function commandFeedback(setStatus) {
     if (setStatus === "off") {
         scriptEngine.runCommandAsync("gamerule sendcommandfeedback false")
@@ -20,4 +23,4 @@ function commandFeedback(setStatus) {
 }
 
 
-export { error, scriptEngine, success, commandFeedback, broadcast }
+export { error, scriptEngine, success, commandFeedback, broadcast, isNumeric }

@@ -44,6 +44,8 @@ import './commands/tpa.js'
 import './commands/credits.js'
 import './commands/config.js'
 import './onItemUse.js'
+import './uis/homes/root.js'
+import './uis/pwarps/root.js'
 import translation from './api/translation.js'
 import playerAPI from './api/playerAPI.js'
 import './api/banAPI.js'
@@ -55,6 +57,8 @@ import { chatRankToggle } from './config.js'
 import banAPI from './api/banAPI.js'
 import commandManager from './api/commands/commandManager.js'
 import uiManager from './uiManager.js'
+import backAPI from './api/backAPI.js'
+import './commands/back.js'
 
 let commandPrefix = mc.world.getDynamicProperty("prefix");
 
@@ -98,6 +102,11 @@ mc.system.afterEvents.scriptEventReceive.subscribe(e => {
     ) {
         let args = betterArgs(e.message);
         uiManager.open(e.sourceEntity, args[0], ...args.slice(1))
+    }
+})
+mc.world.afterEvents.entityDie.subscribe(e => {
+    if (e.deadEntity.typeId === "minecraft:player") {
+        backAPI.insertLocation(e.deadEntity)
     }
 })
 // Couldn't be bothered to make my own file lmao
