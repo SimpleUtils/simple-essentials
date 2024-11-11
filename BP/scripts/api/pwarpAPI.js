@@ -35,13 +35,29 @@ class pwarpAPI {
         const allpwarps = this.db.findDocuments();
         return allpwarps;
     }
-    getAllfromPlayer(player) {
-        const allfromPlayer = this.db.findDocuments({
+    async getAllfromPlayer(player) {
+        const allfromPlayer = await this.db.findDocuments({
             playername: player.name
         })
 
         return allfromPlayer
     }
+    async getAllfromPlayerName(player) {
+        const allfromPlayer = await this.db.findDocuments({
+            playername: player
+        })
+
+        return allfromPlayer
+    }
+    async getAllPlayers() {
+        const allPlayers = await this.db.findDocuments({});
+        
+        const uniquePlayers = [...new Set(allPlayers.map(playerDoc => playerDoc.data.playername))];
+        
+        return uniquePlayers;
+    }
+    
+    
     teleport(player, name) {
         const pwarp = this.db.findDocuments({
             name: name

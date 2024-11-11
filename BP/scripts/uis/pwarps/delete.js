@@ -2,8 +2,8 @@ import pwarpAPI from "../../api/pwarpAPI";
 import { ActionForm } from "../../lib/prismarinedb";
 import uiManager from "../../uiManager";
 
-uiManager.addUI("players.pwarps.delete | players.deletepwarps", "Player Warps UI", (player)=>{
-    let allpwarps = pwarpAPI.getAllfromPlayer(player);
+uiManager.addUI("players.pwarps.delete | players.deletepwarps", "Player Warps UI", async (player)=>{
+    let allpwarps = await pwarpAPI.getAllfromPlayer(player);
     let form = new ActionForm();
     form.title("§bPlayer Warps UI")
     form.button(`§cBack\n§7[ Go Back ]`, null, (player)=>{

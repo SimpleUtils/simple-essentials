@@ -4,6 +4,7 @@ import uiManager from "../../uiManager.js";
 import './list.js'
 import './create.js'
 import './delete.js'
+import './warpsFromPlayer.js'
 
 uiManager.addUI("players.pwarps | players.pwarps.root", "PWarps UI", (player)=>{
     let form = new ActionForm();
