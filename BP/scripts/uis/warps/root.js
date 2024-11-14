@@ -1,6 +1,7 @@
 import * as config from '../../config'
 import { ActionForm } from "../../lib/prismarinedb";
 import uiManager from "../../uiManager";
+import './list'
 
 uiManager.addUI("admin.warps | admin.warps", "Admin Warps", (player)=>{
     let form = new ActionForm();

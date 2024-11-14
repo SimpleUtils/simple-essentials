@@ -1,10 +1,16 @@
 import * as config from '../../config'
 import { ActionForm } from "../../lib/prismarinedb";
 import uiManager from "../../uiManager";
+import './whitelistAdd'
+import './whitelistRemove'
+import './whitelistRoot'
 
 uiManager.addUI("admin.platform | admin.platformSettings", "Platform Config", (player)=>{
     let form = new ActionForm();
     form.title("§bPlatform Config")
+    form.button(`§bWhitelist\n§7[ Edit Whitelist ]`, null, (player)=>{
+        uiManager.open(player, "admin.platform.whitelist")
+    })
     form.button(`§bConsole\n§7[ Edit Console Platform ]`, null, (player)=>{
         uiManager.open(player, "admin.platform.console")
     })

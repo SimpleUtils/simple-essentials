@@ -5,12 +5,12 @@ import uiManager from './uiManager.js'
 
 mc.system.afterEvents.scriptEventReceive.subscribe((event) => {
     const {
-        id, // returns string (wiki:test)
-        initiator, // returns Entity (or undefined if an NPC did not fire the command)
-        message, // returns string (Hello World)
-        sourceBlock, // returns Block (or undefined if a block did not fire the command)
-        sourceEntity, // returns Entity (or undefined if an entity did not fire the command)
-        sourceType, // returns MessageSourceType (can be 'Block', 'Entity', 'NPCDialogue', or 'Server')
+        id,
+        initiator,
+        message,
+        sourceBlock,
+        sourceEntity,
+        sourceType,
     } = event;
     if (id === "simple:run") {
         runCommand(sourceEntity, message)

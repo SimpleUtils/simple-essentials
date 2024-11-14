@@ -17,6 +17,9 @@ uiManager.addUI("admin.tools | admin.tools", "Admin Tools", (player)=>{
         if (!config.broadcasting === true) return simple.error("Broadcasting is not enabled!", player)
         uiManager.open(player, "admin.tools.broadcast")
     })
+    form.button(`§bShop\n§r§7Open the Admin Shop UI`, "textures/azalea_icons/playershop2.png", (player)=>{
+        uiManager.open(player, "admin.shop")
+    })
     form.button(`§bKick menu\n§r§7Open the kick menu`, "textures/azalea_icons/ReportedPlayer.png", (player)=>{
         if (!config.kickMenuEnabled === true) return simple.error("Kick menu is not enabled!", player)
         uiManager.open(player, "admin.tools.kick")
