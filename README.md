@@ -1,31 +1,19 @@
-# Simple Essentials
-An open-source feature rich MCBE Essentials Addon
--
+![simple essentials pride month](https://github.com/user-attachments/assets/77162cdf-5147-4ec3-9356-c125407f9675)
+
+An open-souwce featuwe wich MCBE Essentiaws Addon
+
 Docs: https://simple.amethystdev.com
 
 
-Simple Essentials
+Simpwe Essentiaws
 
 
 
-You can do -help for all of the commands
+You can do -hewp fow all of the *boops your nose* commands
 
 
 
-To access admin features, give yourself the 'admin' tag
-
-
-
-
-
-
-
-
-Chat Ranks
-
-You can add chat ranks to yourself!
-
-The tag must start with "simplerank:"
+To access admin featuwes, give y-y-youwsewf the *boops your nose* 'admin' tag
 
 
 
@@ -33,15 +21,28 @@ The tag must start with "simplerank:"
 
 
 
-You can add name colours with simple-nc:
 
-You can add chat colours with simple-cc:
+Chat Wanks
 
-You can only add name colours and chat colours if you have a rank.
+You can add chat wanks *sweats* to youwsewf!
+
+The tag must stawt with "simpwewank:"
 
 
 
-You can also use the provided Rank UI
+
+
+
+
+You can add nyame cowouws with simpwe-nc:
+
+You ;;w;; can add chat cowouws with simpwe-cc:
+
+You can onwy add nyame cowouws and chat cowouws if you have a wank.
+
+
+
+You ^w^ can awso use the *boops your nose* pwovided W-W-Wank UI
 
 
 
@@ -49,51 +50,52 @@ You can also use the provided Rank UI
 
 Admin UI
 
-The Admin UI contains most of the features in the Script.
+The Admin UI contains most of the *boops your nose* featuwes in the *boops your nose* Scwipt.
 
-You can do loads of stuff including: Making new UIs, editing the Platform Settings, more!
+You can do woads of stuff including: M-Making nyew UIs, editing the *boops your nose* Pwatfowm Settings, m-mowe!
 
-You can also view the credits (people who contributed to the addon.)
-
-
-
-
-Lore System
-
-You can add lore to your items (can be good for roleplays, more!)
+You can awso view the *boops your nose* cwedits (peopwe who contwibuted to the *boops your nose* a-a-addon.)
 
 
 
 
-Modules
+Wowe System
 
-You can add modules by navigating to the Admin UI > Main Settings > Modules.
-
-These are the main way to toggle things you don't want inside of Simple Essentials.
-
-Everything is on by default.
+You can add wowe to youw items (can be good fow wowepways, mowe!)
 
 
 
 
+Moduwes
 
-Platform Settings
+You can add moduwes by nyavigating to the *boops your nose* Admin UI > Main Settings > Modules.
 
-You can ban platforms, and do things with the added tags that come with the platform settings!Desktop: platform_desktop
+These awe the *boops your nose* main w-way to toggle things you don't want inside of Simpwe Essentiaws.
 
-Console: platform_console
+Evewything is on by defauwt.
+
+
+
+
+
+Pwatfowm Settings
+
+You can ban ^-^ pwatfowms, and do things with the *boops your nose* added tags that come with the *boops your nose* pwatfowm s-s-settings!Desktop: p-pwatfowm_desktop
+
+Consowe: platform_console
 
 Mobile: platform_mobile
 
-Desktop: platform_desktop
+Desktop: pwatfowm_desktop
 
 
 
-UI Builder
+UI Buiwdew
 
-You can make stunning custom UIs with Simple Essentials UI Builder
+You can make stunnying custom UIs with Simpwe Essentiaws UI Buiwdew
 
-There is loads of possibilities with the UI Builder!
+Thewe is woads of possibiwities with the *boops your nose* UI Buiwdew!
 
 
-Download Simple Essentials today!
+Downwoad Simpwe Essentiaws today!
+ ^w^
