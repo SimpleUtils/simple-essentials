@@ -7,6 +7,7 @@ class platformAPI {
         this.console = "platform_console"
         this.desktop = "platform_desktop"
         this.db = prismarineDb.table("platformAPI")
+        this.joinMessages = prismarineDb.table("joinMessages")
     }
     addConsoleTag(player) {
         player.runCommandAsync(`tag @s add ${this.console}`)
@@ -41,6 +42,24 @@ class platformAPI {
         if (doc === false) return false;
         this.db.deleteDocumentByID(doc.id)
         return true;
+    }
+    changeMobileMessages(jmessage, lmessage) {
+        let doc = this.joinMessages.findFirst({platform: "mobile"})
+        doc.data.joinMessage = jmessage
+        doc.data.leaveMessage = lmessage
+        this.joinMessages.overwriteDataByID(doc.id, doc.data)
+    }
+    changeDesktopMessages(jmessage, lmessage) {
+        let doc = this.joinMessages.findFirst({platform: "desktop"})
+        doc.data.joinMessage = jmessage
+        doc.data.leaveMessage = lmessage
+        this.joinMessages.overwriteDataByID(doc.id, doc.data)
+    }
+    changeConsoleMessages(jmessage, lmessage) {
+        let doc = this.joinMessages.findFirst({platform: "console"})
+        doc.data.joinMessage = jmessage
+        doc.data.leaveMessage = lmessage
+        this.joinMessages.overwriteDataByID(doc.id, doc.data)
     }
 }
 

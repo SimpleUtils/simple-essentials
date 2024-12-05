@@ -1,5 +1,5 @@
-import homeAPI from "../../api/homeAPI";
-import { ActionForm } from "../../lib/prismarinedb";
+import homeAPI from "../../api/homeAPI.js";
+import { ActionForm } from "../../lib/prismarinedb.js";
 import uiManager from "../../uiManager.js";
 import './list.js'
 import './create.js'

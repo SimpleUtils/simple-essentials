@@ -1,7 +1,7 @@
 import * as ui from '@minecraft/server-ui'
 import * as mc from '@minecraft/server'
-import { openMain } from "./uiManager";
-import { broadcast, error } from '../functions';
+import { openMain } from "./uiManager.js";
+import { broadcast, error } from '../functions.js';
 import uiManager from '../uiManager.js';
 import { ModalForm } from '../lib/form_func.js';
 

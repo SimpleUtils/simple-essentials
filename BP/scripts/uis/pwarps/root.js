@@ -1,5 +1,5 @@
 import pwarpAPI from "../../api/pwarpAPI.js";
-import { ActionForm } from "../../lib/prismarinedb";
+import { ActionForm } from "../../lib/prismarinedb.js";
 import uiManager from "../../uiManager.js";
 import './list.js'
 import './create.js'

@@ -1,4 +1,4 @@
-import { broadcast, error, success } from '../../functions';
+import { broadcast, error, success } from '../../functions.js';
 import uiManager from '../../uiManager.js';
 import { ModalForm } from '../../lib/form_func.js';
 import { removeWarpwithUI, setWarpwithUi } from '../../warp.js';

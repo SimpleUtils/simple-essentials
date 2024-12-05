@@ -43,6 +43,7 @@ import './commands/ban.js'
 import './commands/warp.js'
 import './commands/tpa.js'
 import './commands/credits.js'
+import { world } from '@minecraft/server'
 import './commands/config.js'
 import './onItemUse.js'
 import './uis/homes/root.js'
@@ -52,6 +53,8 @@ import playerAPI from './api/playerAPI.js'
 import './api/banAPI.js'
 import { clearChat } from './clearChat.js'
 import * as config from './config.js'
+import './uis/blockEditor.js'
+import './blockDb.js'
 import platformAPI from './api/platformAPI.js'
 import * as simple from './functions.js'
 import { chatRankToggle } from './config.js'
@@ -64,6 +67,34 @@ import './commands/back.js'
 import rankAPI from './api/rankAPI.js'
 import shopAPI from './api/shopAPI.js'
 
+// banAPI.db.clear();
+
+let consoledoc = platformAPI.joinMessages.findFirst({platform: "console"})
+let desktopdoc = platformAPI.joinMessages.findFirst({platform: "desktop"})
+let mobiledoc = platformAPI.joinMessages.findFirst({platform: "mobile"})
+
+if(!consoledoc) {
+    platformAPI.joinMessages.insertDocument({
+        platform: "console",
+        joinMessage: `plr joined. Welcome!`,
+        leaveMessage: `plr left. Goodbye!`
+    })
+}
+if(!desktopdoc) {
+    platformAPI.joinMessages.insertDocument({
+        platform: "desktop",
+        joinMessage: `plr joined. Welcome!`,
+        leaveMessage: `plr left. Goodbye!`
+    })
+}
+if(!mobiledoc) {
+    platformAPI.joinMessages.insertDocument({
+        platform: "mobile",
+        joinMessage: `plr joined. Welcome!`,
+        leaveMessage: `plr left. Goodbye!`
+    })
+}
+
 Player.prototype.success = function (msg) {
     this.sendMessage(translation.getTranslation(this, "success", msg));
 }
@@ -75,6 +106,12 @@ Player.prototype.error = function (msg) {
 }
 Player.prototype.warn = function (msg) {
     this.sendMessage(translation.getTranslation(this, "warn", msg));
+}
+Player.prototype.tagbeadd = function (tag) {
+    this.runCommandAsync(`tag @s add "${tag}"`)
+}
+Player.prototype.tagberemove = function (tag) {
+    this.runCommandAsync(`tag @s remove "${tag}"`)
 }
 
 World.prototype.error = function (msg) {
@@ -147,56 +184,83 @@ commandManager.addCommand("floatingtext", { description: "Floating text" }, ({ m
 })
 // ban system kick :p
 mc.world.afterEvents.playerSpawn.subscribe(async ({ player, initialSpawn }) => {
-    if (!config.banSystem === true) return console.log("Ban System is disabled, so the player is not getting checked for bans!")
-    let bans = banAPI.getBans();
-    let checkbanOfTargetPlayerResult;
-
-    for (const ban of bans) {
-        if (player.name === ban.data.name) {
-            checkbanOfTargetPlayerResult = ban.data.name
-        }
-    }
-    simple.scriptEngine.runCommandAsync(`kick ${checkbanOfTargetPlayerResult} You are banned from this server.`)
+    banAPI.kickPlayer(player)
 })
 
 // Platform bans
 mc.world.afterEvents.playerSpawn.subscribe(async ({ player, initialSpawn }) => {
     platformAPI.clearAllPlatformTags(player)
+    if (initialSpawn === true) {
     if (!config.platformSystem === true) return console.log("Platform system is disabled, will not kick people that are on banned platforms, and players will not get platform tags!")
     if (player.clientSystemInfo.platformType === "Desktop") {
         if (config.desktopBanned === true) {
-            if (platformAPI.db.findFirst({name: player.name})) return;
+            let dd = platformAPI.joinMessages.findFirst({platform: "desktop"})
+            let jmsg = dd.data.joinMessage.replaceAll("plr", player.name)
+            if (platformAPI.db.findFirst({name: player.name})) return world.sendMessage(`§e${jmsg}`);
             simple.scriptEngine.runCommandAsync(`kick ${player.name} Platform is banned by the server admins.`)
         } else {
             platformAPI.addDesktopTag(player)
+            let dd = platformAPI.joinMessages.findFirst({platform: "desktop"})
+            let jmsg = dd.data.joinMessage.replaceAll("plr", player.name)
+            world.sendMessage(`§e${jmsg}`)
             console.log("Player joined successfully on desktop")
         }
     }
     if (player.clientSystemInfo.platformType === "Mobile") {
         if (config.mobileBanned === true) {
-            if (platformAPI.db.findFirst({name: player.name})) return;
+            let dd = platformAPI.joinMessages.findFirst({platform: "mobile"})
+            let jmsg = dd.data.joinMessage.replaceAll("plr", player.name)
+            if (platformAPI.db.findFirst({name: player.name})) return world.sendMessage(`§e${jmsg}`);
             simple.scriptEngine.runCommandAsync(`kick ${player.name} Platform is banned by the server admins.`)
         } else {
             platformAPI.addMobileTag(player)
+            let dd = platformAPI.joinMessages.findFirst({platform: "mobile"})
+            let jmsg = dd.data.joinMessage.replaceAll("plr", player.name)
+            world.sendMessage(`§e${jmsg}`)
             console.log("Player joined successfully on mobile")
         }
     }
     if (player.clientSystemInfo.platformType === "Console") {
         
-        if (config.desktopBanned === true) {
-            if (platformAPI.db.findFirst({name: player.name})) return;
+        if (config.consoleBanned === true) {
+            let dd = platformAPI.joinMessages.findFirst({platform: "console "})
+            let jmsg = dd.data.joinMessage.replaceAll("plr", player.name)
+            if (platformAPI.db.findFirst({name: player.name})) return world.sendMessage(`§e${jmsg}`);
             simple.scriptEngine.runCommandAsync(`kick ${player.name} Platform is banned by the server admins.`)
         } else {
             platformAPI.addConsoleTag(player)
+            let dd = platformAPI.joinMessages.findFirst({platform: "console"})
+            let jmsg = dd.data.joinMessage.replaceAll("plr", player.name)
+            world.sendMessage(`§e${jmsg}`)
             console.log("Player joined successfully on console")
         }
     }
+    }
 })
 mc.world.beforeEvents.playerLeave.subscribe((ev) => {
+    let player = ev.player
     playerAPI.handlePlayerLeave(ev.player.name)
+    if (player.clientSystemInfo.platformType === "Desktop") {
+    let dd = platformAPI.joinMessages.findFirst({platform: "desktop"})
+    let jmsg = dd.data.leaveMessage.replaceAll("plr", player.name)
+    world.sendMessage(`§e${jmsg}`)
+    }
+    if (player.clientSystemInfo.platformType === "Console") {
+        let dd = platformAPI.joinMessages.findFirst({platform: "console"})
+        let jmsg = dd.data.leaveMessage.replaceAll("plr", player.name)
+        world.sendMessage(`§e${jmsg}`)
+        }
+        if (player.clientSystemInfo.platformType === "Mobile") {
+            let dd = platformAPI.joinMessages.findFirst({platform: "mobile"})
+            let jmsg = dd.data.leaveMessage.replaceAll("plr", player.name)
+            world.sendMessage(`§e${jmsg}`)
+            }    
 })
 mc.world.beforeEvents.chatSend.subscribe((eventData) => {
     const msg = eventData
+    if (!msg.message.startsWith(commandManager.prefix)) {
+        if (msg.sender.hasTag("muted")) return msg.sender.error("You are muted!"), msg.cancel = true;         
+    }
     switch (eventData.message) {
         default:
             if (msg.message.startsWith(commandPrefix)) {
@@ -205,6 +269,7 @@ mc.world.beforeEvents.chatSend.subscribe((eventData) => {
                 commandManager.run(eventData)
                 // runCommand(msg.sender, `${removedPrefix}`, msg)
             } else {
+                if(config.chatRankToggle === false) return;
                 rankAPI.createMessage(msg.sender, msg.message)
                 msg.cancel = true;
             }

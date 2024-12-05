@@ -1,8 +1,8 @@
-import { scriptEngine } from "../../functions";
+import { scriptEngine } from "../../functions.js";
 import * as ui from '@minecraft/server-ui'
 import * as mc from '@minecraft/server'
-import { error, success } from "../../functions";
-import uiManager from '../../uiManager';
+import { error, success } from "../../functions.js";
+import uiManager from '../../uiManager.js';
 import { ModalForm } from '../../lib/form_func.js';
 
 

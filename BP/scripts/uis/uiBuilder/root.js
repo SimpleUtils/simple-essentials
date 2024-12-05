@@ -3,11 +3,15 @@ import { system, world } from "@minecraft/server";
 import uiBuilder from "../../api/uiBuilder";
 import { ActionForm } from "../../lib/form_func";
 import uiManager from "../../uiManager";
+import './export'
 import moment from '../../lib/moment'
 import { ChestFormData } from "../../lib/chestUI"
 uiManager.addUI("admin.uibuilder.root | admin.uibuilder.root", "UI Builder Root", (player)=>{
     let form = new ActionForm();
     form.title("§f§u§l§l§s§c§r§e§e§n§rUI Builder");
+    form.button("§eExport\n§7Export a UI to Blossom Essentials", null, (player)=>{
+        uiManager.open(player, "admin.uibuilder.export");
+    })
     form.button(`§aAdd\n§r§7Add a UI`, null, (player)=>{
         uiManager.open(player, "admin.uibuilder.add");
     })

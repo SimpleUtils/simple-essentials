@@ -19,7 +19,7 @@ class simplePlayers {
         if (targetPlayer) {
             return targetPlayer;
         } else {
-            return false;
+            return undefined;
         }
     }    
     handlePlayerLeave(player) {

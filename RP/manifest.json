@@ -14,7 +14,7 @@
 		}
 	},
 	"header": {
-		"name": "Simple Essentials 0.1.8.1",
+		"name": "Simple Essentials 0.1.9.1",
 		"description": "Made by FruitKitty on dsc",
 		"min_engine_version": [
 			1,
@@ -23,9 +23,9 @@
 		],
 		"uuid": "dbb7cd58-9e27-4ac4-938e-a9459a1637b4",
 		"version": [
-			1,
 			0,
-			15
+			1,
+			91
 		]
 	},
 	"modules": [

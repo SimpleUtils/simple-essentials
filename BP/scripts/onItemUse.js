@@ -9,7 +9,8 @@ mc.world.afterEvents.itemUse.subscribe((event) => {
         const value = mc.world.getDynamicProperty(id);
 
         if (id === `${itemStack.typeId}`) {
+                if (value === "") return;
                 source.runCommandAsync(`${value}`);
-        }
+        } else return;
       });
 });

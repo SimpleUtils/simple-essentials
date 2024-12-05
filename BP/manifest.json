@@ -6,7 +6,7 @@
         ]
     },
     "header": {
-        "name": "Simple Essentials 0.1.8.1",
+        "name": "Simple Essentials 0.1.9.1",
         "description": "Made by fruitkitty",
         "min_engine_version": [
             1,
@@ -15,9 +15,9 @@
         ],
         "uuid": "ee46b53f-fa14-454d-a72a-3cb794e8ac65",
         "version": [
-            1,
             0,
-            81
+            1,
+            91
         ]
     },
     "modules": [
@@ -46,7 +46,7 @@
     "dependencies": [
         {
             "module_name": "@minecraft/server",
-            "version": "1.16.0-beta"
+            "version": "1.17.0-beta"
         },
         {
             "module_name": "@minecraft/server-ui",

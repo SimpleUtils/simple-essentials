@@ -24,8 +24,8 @@ import './uiBuilder/editButton.js'
 import './uiBuilder/editButtons.js'
 import './uiBuilder/root.js'
 import { openAdminTools } from './adminTools.js';
-import uiManager from "../uiManager";
-import { ActionForm, playerAPI, prismarineDb } from "../lib/prismarinedb";
+import uiManager from "../uiManager.js";
+import { ActionForm, playerAPI, prismarineDb } from "../lib/prismarinedb.js";
 
 uiManager.addUI("admin.main | admin.main", "Admin Main", (player)=>{
     let form = new ActionForm();

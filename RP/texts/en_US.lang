@@ -1,3 +1,13 @@
-pack.name=Custom Commands RP
-pack.description=teehee :3
-item.bridge:admin=Admin UI
+#This line is for when a player joins your world or server 
+multiplayer.player.joined=--------------------
+
+
+#This line is for when a player joins your realm. 
+multiplayer.player.joined.realms=--------------------
+
+#This line is for when a player leaves your world or server 
+multiplayer.player.left=-------------------- 
+
+
+#This line is for when a player leaves your realm. 
+multiplayer.player.left.realms=-------------------- 

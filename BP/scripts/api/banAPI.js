@@ -1,44 +1,52 @@
 import { prismarineDb } from "../lib/prismarinedb";
 import { system, world } from "@minecraft/server"
 import { scriptEngine } from "../functions";
+import playerStorage from "./playerStorage";
 
 class banAPI {
     constructor() {
         this.db = prismarineDb.table("BanDB");
     }
-    banPlayer(name) {
-        let doc = this.db.findFirst({name});
-        if(doc) {
-            return false;
+    banPlayer(player) {
+        let uuid = playerStorage.getID(player)
+        let doc = this.db.findFirst({ uuid });
+        if (doc) {
+            throw new Error("UUID is already in the database")
         } else {
             this.db.insertDocument({
-                name
+                uuid,
+                name: player.name
             })
         }
         return true;
     }
     unbanPlayer(name) {
-        let doc = this.db.findFirst({name});
+        let doc = this.db.findFirst({ name });
+
         world.sendMessage(`${name}`)
-        if(doc) {
+        if (doc) {
             this.db.deleteDocumentByID(doc.id);
             return true;
         } else {
-            return false;
+            throw new Error("Player is not banned!")
         }
     }
-    getBan(username) {
-        return this.db.findFirst({username});
+    getBanbyUsername(username) {
+        return this.db.findFirst({ name: username });
+    }
+    getBanbyID(uuid) {
+        return this.db.findFirst(uuid)
     }
     getBans() {
         return this.db.data;
     }
     kickPlayer(player) {
-        let ban = this.getBan(player);
-        if(!ban) return false;
-        system.run(()=>{
-        scriptEngine.runCommand(`kick ${player}`)
-    }) 
+        let uuid = playerStorage.getID(player)
+        let ban = this.getBanbyID(uuid);
+        if (!ban) throw new Error("Player is not banned")
+        system.run(() => {
+            scriptEngine.runCommand(`kick ${player.name} You are banned from this server`)
+        })
         return true;
     }
     //unbanPlayer(name) {

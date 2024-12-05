@@ -1,0 +1,10 @@
+﻿multiplayer.player.joined=-------------------- 
+
+multiplayer.player.joined.realms=--------------------
+
+
+multiplayer.player.left=-------------------- 
+
+
+#This line is for when a player leaves your realm. 
+multiplayer.player.left.realms=-------------------- 
